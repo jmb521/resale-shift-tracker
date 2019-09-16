@@ -44,12 +44,15 @@ class AdminsController < ApplicationController
       else
         redirect "/admins/#{@admin.id}"
         #!add flash message that the password they entered was wrong. 
-
-    redirect "/admins/:id"
+      end
+    else
+      @admin.update(:first_name => params[:admin][:first_name], :last_name => params[:admin][:last_name], :username => params[:admin][:username])
+      redirect "/admins/:id"
+    end
   end
 
   # DELETE: /admins/5/delete
-  delete "/admins/:id/delete" do
-    redirect "/admins"
-  end
+  # delete "/admins/:id/delete" do
+  #   redirect "/admins"
+  # end
 end
