@@ -1,1 +1,9 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>Admin profile page</h1>
+
+<%= @admin.username %>
+<br />
+<%= @admin.first_name %>
+<br />
+<%= @admin.last_name %>
+<br />
+<a href="/admin/<%= @admin.id%>/edit">Edit your information </a>
