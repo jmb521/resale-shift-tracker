@@ -1,3 +1,21 @@
 <form action="/resales" method="post">
+    <label for="Season">Season: </label>
+    <select name="resale[season]">
+        <option></option>
+        <option value="fall">Fall</option>
+        <option value="spring">Spring</option>
+    </select>
+    <br />
+    <br />
+    <label for="year">Year: </label>
+    <br />
+    <input type="text" name="resale[year]" id="year" />
+    <br />
+    <br />
+    <label for="spreadsheet">Spreadsheet from MCM</label>
+    <br />
     
+    <input type="file" name="resale[spreadsheet]" id="spreadsheet" accept="file_extension/*" />
+    <br />
+    <input type="submit" name="submit" value="Submit" />
 </form>
