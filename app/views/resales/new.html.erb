@@ -1,4 +1,4 @@
-<form action="/resales" method="post">
+<form action="/resales" method="post" enctype="multipart/form-data">
     <label for="Season">Season: </label>
     <select name="resale[season]">
         <option></option>
@@ -12,10 +12,10 @@
     <input type="text" name="resale[year]" id="year" />
     <br />
     <br />
-    <label for="spreadsheet">Spreadsheet from MCM</label>
+    <label for="file">Spreadsheet from MCM</label>
     <br />
     
-    <input type="file" name="resale[spreadsheet]" id="spreadsheet" accept="file_extension/*" />
+    <input type="file" name="resale[file]" id="file" accept="file_extension/*" />
     <br />
     <input type="submit" name="submit" value="Submit" />
 </form>
