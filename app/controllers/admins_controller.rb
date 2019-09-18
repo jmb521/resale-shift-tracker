@@ -15,6 +15,7 @@ class AdminsController < ApplicationController
 
     @admin = Admin.new(params[:admin])
     if @admin.save
+      session[:admin_id] = @admin.id
       redirect '/resales'
     else
       redirect '/signup'
