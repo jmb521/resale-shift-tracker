@@ -11,7 +11,10 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
-gem 'rubyXL'
+gem 'roo'
+gem 'roo-xls'
+ 
+
 
 group :test do
   gem 'rspec'
