@@ -1,1 +1,13 @@
-<h1>This is the Model's index page.</h1>
+<h1>Workers: </h1>
+<form action="/search" method="get">
+    <label for="name_search">Last Name Search:</label>
+    <br />
+    <input type="text" name="search" />
+    <br />
+    <input type="submit" name="submit" value="Search" />
+</form>
+<br />
+<br />
+<% @workers.each do |w| %>
+<p><a href="/workers/<%= w.id %>"><%=w.first_name%> <%= w.last_name %></a></p>
+<% end %>
