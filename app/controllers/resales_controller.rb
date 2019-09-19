@@ -2,6 +2,7 @@ class ResalesController < ApplicationController
 
   # GET: /resales
   get "/resales" do
+    @resales = Resale.all
     erb :"/resales/index.html"
   end
 
@@ -12,7 +13,7 @@ class ResalesController < ApplicationController
 
   # POST: /resales
   post "/resales" do
-    
+    binding.pry 
     file = params[:resale][:file][:tempfile]
     @resale = Resale.create(:season => params[:resale][:season], :year => params[:resale][:year], :spreadsheet => file.path, :admin_id => current_user.id)
     if @resale
@@ -24,19 +25,11 @@ class ResalesController < ApplicationController
           last_name = r[:volunteer].split(", ")[0]
           w = Worker.find_or_create_by(first_name: first_name, last_name: last_name, member_number: r[:seller_number])
           s = w.shifts.find_or_create_by(resale_date: r[:date], start_time: r[:start_time], end_time: r[:end_time], description: r[:description], resale_id: @resale.id)
-          binding.pry
+          
         end
-
-        
       end
       
-
-
-
-
-
-
-      redirect "/resales"
+      redirect '/resales'
     else
       #! flash message that resale couldn't be saved. 
       redirect '/resales/new'
@@ -65,8 +58,16 @@ class ResalesController < ApplicationController
   
   # DELETE: /resales/5/delete
   delete "/resales/:id/delete" do
+    
     @resale = Resale.find(params[:id])
-    @resale.destroy
-    redirect "/resales"
+    @admin = Admin.find(@resale.admin_id)
+    if @admin.authenticate(params[:password])
+      Shift.where(:resale_id => @resale.id).each {|r| r.destroy}
+      ShiftWorkers.where(:resale_id => @resale.id).each {|r| r.destroy}
+      @resale.destroy
+      redirect '/resales'
+    end
+    #! you aren't allowed to edit flash message
+    redirect "/resales/#{@resale.id}"
   end
 end

@@ -1,1 +1,14 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1>Resale Information: </h1>
+
+<br />
+Season: <%= @resale.season %>
+<br />
+Year: <%= @resale.year %>
+<br />
+<a href="/resales/<%= @resale.id %>/edit">Edit</a>
+<form action="/resales/<%= @resale.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="delete" />
+    <label for="password">Enter your password to confirm:</label>
+    <input type="password" name="password" />
+    <input type="submit" value="Delete" />
+</form>
