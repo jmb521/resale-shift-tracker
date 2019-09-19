@@ -63,7 +63,7 @@ class ResalesController < ApplicationController
     @admin = Admin.find(@resale.admin_id)
     if @admin.authenticate(params[:password])
       Shift.where(:resale_id => @resale.id).each {|r| r.destroy}
-      ShiftWorkers.where(:resale_id => @resale.id).each {|r| r.destroy}
+      
       @resale.destroy
       redirect '/resales'
     end
