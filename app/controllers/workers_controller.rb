@@ -32,8 +32,11 @@ class WorkersController < ApplicationController
   
   # PATCH: /workers/5
   patch "/workers/:id" do
-    @worker = Worker.find(params[:id])
-    redirect "/workers/:id"
+    # @shift_worker = ShiftWorker.find(params[:id])
+    # @shift_worker.update(checked_in: true)
+    # redirect "/shift_workers/#{@shift_worker.worker_id}"
+    #! need to allow workers info to be edited. 
+    
   end
   
   # DELETE: /workers/5/delete
@@ -44,7 +47,9 @@ class WorkersController < ApplicationController
 
   get '/search' do
     
-    @workers = Worker.where("last_name LIKE ?", "%#{params[:search]}%")
+    @workers = Worker.search(params[:search])
     erb :"/workers/index.html"
   end
+
+  
 end

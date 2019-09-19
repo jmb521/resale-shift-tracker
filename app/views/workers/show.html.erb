@@ -26,10 +26,10 @@
         <td><%= s.shift.description %></td>
         
         <td><%= s.checked_in %></td>
-        <td><form action="/check_in/<%= s.id %>" method="post">
+        <td><form action="/shift_workers/<%= s.id %>" method="post">
             <input type="hidden" name="_method" value="patch" />
             <input type="submit" name="submit" value="Check In" />
-        </form>></td>
+        </form></td>
     </tr>
     
     <% end %>
