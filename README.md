@@ -4,11 +4,11 @@ Site checklist:
 General: 
 - [ ] Add Sinatra flash gem
 - [ ] - incorporate flash messages
-- [ ] - add helper methods for current_user
+- [x] - add helper methods for current_user
 
 Root:
 - [ ] Navigation
-- [ ] Instructions to admin
+- [ ] Instructions to admin on how to get things working
 
 Admin:
 - [ ] login page and actions in controller
