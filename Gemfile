@@ -13,7 +13,7 @@ gem 'bcrypt'
 gem 'tux'
 gem 'roo'
 gem 'roo-xls'
- 
+gem 'sinatra-flash'
 
 
 group :test do

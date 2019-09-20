@@ -2,7 +2,7 @@
 Site checklist:
 
 General: 
-- [ ] Add Sinatra flash gem
+- [x] Add Sinatra flash gem
 - [ ] - incorporate flash messages
 - [x] - add helper methods for current_user
 

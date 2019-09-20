@@ -1,18 +1,13 @@
-# require './config/environment'
-# require 'rubyXL'
-# require 'rubyXL/convenience_methods/cell'
-# require 'rubyXL/convenience_methods/color'
-# require 'rubyXL/convenience_methods/font'
-# require 'rubyXL/convenience_methods/workbook'
-# require 'rubyXL/convenience_methods/worksheet'
+
 require 'roo'
 require 'roo-xls'
-# require 'creek'
+require 'sinatra/flash'
 
 
 class ApplicationController < Sinatra::Base
 
   configure do
+    register Sinatra::Flash
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
