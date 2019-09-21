@@ -30,7 +30,7 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "Signed in!"
       redirect '/resales'
     else
-      flash[:error] = "Wrong password, try again!"
+      flash[:error] = "You may have entered an incorrect password!"
       redirect '/login'
     end
   end
