@@ -2,29 +2,19 @@ class ShiftWorkersController < ApplicationController
 
   # GET: /shift_workers
   get "/shift_workers" do
+    @shift_worker = ShiftWorker.all
     erb :"/shift_workers/index.html"
   end
 
-  # GET: /shift_workers/new
-  get "/shift_workers/new" do
-    erb :"/shift_workers/new.html"
-  end
-
-  # POST: /shift_workers
-  post "/shift_workers" do
-    redirect "/shift_workers"
-  end
-
-  # GET: /shift_workers/5
-  get "/shift_workers/:id" do
-    erb :"/shift_workers/show.html"
-  end
-
-  # GET: /shift_workers/5/edit
-  get "/shift_workers/:id/edit" do
-    erb :"/shift_workers/edit.html"
-  end
-
+  
+  # # GET: /shift_workers/5
+  # get "/shift_workers/:id" do
+  #   @shift_worker = ShiftWorker.find(params[:id])
+  #   erb :"/shift_workers/show.html"
+  # end
+  
+ 
+  
   # PATCH: /shift_workers/5
   patch "/shift_workers/:id" do
     @shift_worker = ShiftWorker.find(params[:id])
@@ -32,9 +22,10 @@ class ShiftWorkersController < ApplicationController
     redirect "/shift_workers/#{@shift_worker.worker_id}"
     
   end
-
+  
   # DELETE: /shift_workers/5/delete
   delete "/shift_workers/:id/delete" do
+    @shift_worker = ShiftWorker.find(params[:id])
     redirect "/shift_workers"
   end
 end

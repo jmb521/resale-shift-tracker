@@ -16,8 +16,10 @@ class AdminsController < ApplicationController
     @admin = Admin.new(params[:admin])
     if @admin.save
       session[:admin_id] = @admin.id
+      flash[:message] = "Sign up successful"
       redirect '/resales'
     else
+      flash[:error] = "Something went wrong!"
       redirect '/signup'
     end
   end
@@ -41,13 +43,16 @@ class AdminsController < ApplicationController
     if !params[:admin][:password].empty? && !params[:admin][:new_password].empty?
       if @admin.authenticate(params[:admin][:password])
         @admin.update(:first_name => params[:admin][:first_name], :last_name => params[:admin][:last_name], :username => params[:admin][:username], :password => params[:admin][:new_password])
-        #!add flash messages verifying profile is updated
-      else
+        flash[:message] = "Admin account updated"
         redirect "/admins/#{@admin.id}"
+      else
+        flash[:error] = "Password was incorrect"
+        redirect "/admins/#{@admin.id}/edit"
         #!add flash message that the password they entered was wrong. 
       end
     else
       @admin.update(:first_name => params[:admin][:first_name], :last_name => params[:admin][:last_name], :username => params[:admin][:username])
+      flash[:message] = "Admin accounted updated!"
       redirect "/admins/:id"
     end
   end

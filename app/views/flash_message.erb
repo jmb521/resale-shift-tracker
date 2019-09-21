@@ -1,0 +1,9 @@
+<% if flash.has_key?(:message) %>
+    <div class="message">
+        <%= flash[:message] %>
+    </div>
+<% elsif flash.has_key?(:error) %>
+    <div class="error">
+        <%= flash[:error] %>
+    </div>
+<% end %>

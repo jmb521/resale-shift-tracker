@@ -1,1 +1,36 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+
+<h1><%= @shift_worker.worker.first_name %> <%= @shift_worker.worker.last_name %></h1>
+<br />
+
+<h3>Member number: <%= @shift_worker.worker.member_number %></h3>
+<br />
+<table>
+   <tr>
+       <th>Resale Date:</th>
+       <th>Start Time</th>
+       <th>End Time</th>
+       <th>Shift Description</th>
+       <th>Have you checked in?</th>
+       <th></th>
+
+   </tr>
+    
+    <tr>
+        <td><%= @shift_worker.shift.resale_date.strftime("%A, %B, %e") %></td>
+        
+        
+        <td><%= @shift_worker.shift.start_time.strftime("%I:%M %P") %></td>
+        
+        <td><%= @shift_worker.shift.end_time.strftime("%I:%M %P") %></td>
+        
+        <td><%= @shift_worker.shift.description %></td>
+        
+        <td><%= @shift_worker.checked_in %></td>
+        <td><form action="/shift_workers/<%= @shift_worker.id %>" method="post">
+            <input type="hidden" name="_method" value="patch" />
+            <input type="submit" name="submit" value="Check In" />
+        </form></td>
+    </tr>
+    
+
+</table>

@@ -23,11 +23,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    @admin = Admin.find_by(:username => params[:username])
-    if @admin && @admin.authenticate(params[:password])
+    @admin = Admin.find_by(:username => params[:admin][:username])
+    
+    if @admin && @admin.authenticate(params[:admin][:password])
       session[:admin_id] = @admin.id
+      flash[:message] = "Signed in!"
       redirect '/resales'
     else
+      flash[:error] = "Wrong password, try again!"
       redirect '/login'
     end
   end

@@ -32,17 +32,23 @@ class WorkersController < ApplicationController
   
   # PATCH: /workers/5
   patch "/workers/:id" do
-    # @shift_worker = ShiftWorker.find(params[:id])
-    # @shift_worker.update(checked_in: true)
-    # redirect "/shift_workers/#{@shift_worker.worker_id}"
-    #! need to allow workers info to be edited. 
+    @worker = Worker.find(params[:id])
+    @worker.update(params[:worker])
+    redirect "/workers/#{@worker.id}"
     
   end
   
   # DELETE: /workers/5/delete
   delete "/workers/:id/delete" do
     @worker = Worker.find(params[:id])
-    redirect "/workers"
+    if current_user.authenticate(params[:password])
+      @worker.destroy
+      flash[:message] = "Worker Successfully Deleted"
+      redirect '/workers'
+    else
+      flash[:message] = "You entered the wrong password"
+      redirect "/workers"
+    end
   end
 
   get '/search' do

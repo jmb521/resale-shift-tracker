@@ -13,7 +13,7 @@ class ResalesController < ApplicationController
 
   # POST: /resales
   post "/resales" do
-    binding.pry 
+    
     file = params[:resale][:file][:tempfile]
     @resale = Resale.create(:season => params[:resale][:season], :year => params[:resale][:year], :spreadsheet => file.path, :admin_id => current_user.id)
     if @resale
