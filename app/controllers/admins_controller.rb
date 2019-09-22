@@ -48,7 +48,7 @@ class AdminsController < ApplicationController
       else
         flash[:error] = "Password was incorrect"
         redirect "/admins/#{@admin.id}/edit"
-        #!add flash message that the password they entered was wrong. 
+        
       end
     else
       @admin.update(:first_name => params[:admin][:first_name], :last_name => params[:admin][:last_name], :username => params[:admin][:username])

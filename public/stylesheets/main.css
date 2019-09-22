@@ -94,7 +94,7 @@
     text-align: center;
   } 
 
-  li {
+  nav ul li {
     text-align: center;
     display: inline-block;  
     padding-right: 25px;
@@ -114,6 +114,10 @@
     margin-top: 3px;
     background-color: #ffb8b3;
     text-align: center;
+  }
+  ol li {
+    list-style: decimal;
+    margin-left: 25px;
   }
 }
 

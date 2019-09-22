@@ -24,6 +24,7 @@ class ResalesController < ApplicationController
           first_name = r[:volunteer].split(", ")[1]
           last_name = r[:volunteer].split(", ")[0]
           w = Worker.find_or_create_by(first_name: first_name, last_name: last_name, member_number: r[:seller_number])
+          w.update(:first_name => first_name, :last_name => last_name, :member_number => r[:seller_number])
           s = w.shifts.find_or_create_by(resale_date: r[:date], start_time: r[:start_time], end_time: r[:end_time], description: r[:description], resale_id: @resale.id)
           
         end

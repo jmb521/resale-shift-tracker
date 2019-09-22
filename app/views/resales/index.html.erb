@@ -1,4 +1,15 @@
+<h3>
+    How this works: 
 
+</h3>
+<ol>
+    <li>Download the volunteer file from MyConsignment Manager. </li>
+    <li>Click on the link above to create a new resale</li>
+    <li>Fill out the form and upload the file</li>
+    <li>Click on the Worker link and allow workers to find their accounts and check in to their shifts.</li>
+</ol>
+<br />
+<p>Either select a resale from below if you have already uploaded the spreadsheet or select </p>
 <% @resales.each do |r| %>
 
     <p><a href="/resales/<%= r.id %>"><%= r.season %> <%= r.year %> </a></p>
