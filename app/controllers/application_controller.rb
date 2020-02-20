@@ -55,4 +55,8 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  def current_resale
+    @resale = Resale.find(session[:resale_id]) if session[:resale_id]
+  end
+
 end

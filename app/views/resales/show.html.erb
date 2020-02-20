@@ -1,6 +1,9 @@
 
 <h1>Resale Information: </h1>
-
+Set Default Resale 
+<form action="/set_default_resale/<%= @resale.id %>" method="GET">
+    <input type="submit" name="sumbit" value="Set this as the default" />
+</form>
 <br />
 Season: <%= @resale.season %>
 <br />
@@ -11,5 +14,21 @@ Year: <%= @resale.year %>
     <input type="hidden" name="_method" value="delete" />
     <label for="password">Enter your password to confirm:</label>
     <input type="password" name="password" />
-    <input type="submit" value="Delete" />
+    <input type="submit" value="Delete" class="delete-button"/>
 </form>
+
+<hr>
+<h3>Shift percentages by Worker: </h3>
+<% if current_resale %>
+<% current_resale.workers.each do |worker| %>
+<p>
+    worker_id: <%= worker.id %>
+    <%= worker.first_name %> <%= worker.last_name %>: 
+    <%= worker.shifts.where(:resale_id => @resale.id).count %>
+</p>       
+<% end %>
+<% else %>
+    You need to set a resale
+<% end %>
+
+

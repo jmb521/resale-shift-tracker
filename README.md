@@ -8,7 +8,7 @@ General:
 
 Root:
 - [ ] Navigation
-- [ ] Instructions to admin on how to get things working
+- [x] Instructions to admin on how to get things working
 
 Admin:
 - [ ] login page and actions in controller

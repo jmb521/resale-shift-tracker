@@ -2,7 +2,7 @@ class WorkersController < ApplicationController
 
   # GET: /workers
   get "/workers" do
-    @workers = Worker.all
+    @workers = Worker.search(params[:search]).order(last_name: :asc) ||Worker.order(last_name: :asc) 
     erb :"/workers/index.html"
   end
 
@@ -20,8 +20,12 @@ class WorkersController < ApplicationController
 
   # GET: /workers/5
   get "/workers/:id" do
-    @worker = Worker.find(params[:id])
-    erb :"/workers/show.html"
+    @worker = current_resale.workers.find(params[:id])
+    if @worker
+      @shifts = @worker.shifts.join(:shift_workers).where(:checked_in => false)
+
+      erb :"/workers/show.html"
+    end
   end
   
   # GET: /workers/5/edit
@@ -51,11 +55,8 @@ class WorkersController < ApplicationController
     end
   end
 
-  get '/search' do
-    
-    @workers = Worker.search(params[:search])
-    erb :"/workers/index.html"
-  end
+
+  
 
   
 end

@@ -20,12 +20,20 @@ class ResalesController < ApplicationController
       
       new_sheet = Roo::Spreadsheet.open(@resale.spreadsheet)
       sheet_hash = new_sheet.sheet(0).each(date: 'Date', start_time: 'Start Time', end_time: 'End Time', description: 'Description', volunteer: 'Volunteer Name', seller_number: 'Seller Number' ) do |r|
-        if r[:date] != "Date" && r[:start_time] != "Start Time" 
-          first_name = r[:volunteer].split(", ")[1]
-          last_name = r[:volunteer].split(", ")[0]
-          w = Worker.find_or_create_by(first_name: first_name, last_name: last_name, member_number: r[:seller_number])
+        if r[:date] != "Date" && r[:start_time] != "Start Time" && r[:volunteer] != "empty"
+          first_name = r[:volunteer].split(", ")[1].strip
+          last_name = r[:volunteer].split(", ")[0].strip
+          
+          w = Worker.find_or_create_by(first_name: first_name, last_name: last_name, member_number: r[:seller_number]) 
           w.update(:first_name => first_name, :last_name => last_name, :member_number => r[:seller_number])
-          s = w.shifts.find_or_create_by(resale_date: r[:date], start_time: r[:start_time], end_time: r[:end_time], description: r[:description], resale_id: @resale.id)
+          if !@resale.workers.include?(w)
+            @resale.workers << w 
+          end
+          s = Shift.find_or_create_by(resale_date: r[:date], start_time: r[:start_time], end_time: r[:end_time], description: r[:description], resale_id: @resale.id)  
+          w.shifts << s
+            # s = rw.shifts.find_or_initialize_by(resale_date: r[:date], start_time: r[:start_time], end_time: r[:end_time], description: r[:description], resale_id: @resale.id)
+            # s.save
+          
           
         end
       end
@@ -42,6 +50,8 @@ class ResalesController < ApplicationController
   # GET: /resales/5
   get "/resales/:id" do
     @resale = Resale.find(params[:id])
+    
+    
     erb :"/resales/show.html"
   end
   
@@ -61,14 +71,24 @@ class ResalesController < ApplicationController
   delete "/resales/:id/delete" do
     
     @resale = Resale.find(params[:id])
-    @admin = Admin.find(@resale.admin_id)
-    if @admin.authenticate(params[:password])
+    
+    if current_user.authenticate(params[:password])
       Shift.where(:resale_id => @resale.id).each {|r| r.destroy}
       
       @resale.destroy
       redirect '/resales'
     end
-    #! you aren't allowed to edit flash message
+    flash[:error] = "Sorry, you are not authorized to edit"
     redirect "/resales/#{@resale.id}"
+  end
+
+  get '/set_default_resale/:id' do
+    @resale = Resale.find(params[:id])
+    if @resale
+      session[:resale_id] = @resale.id
+      redirect '/resales'
+    else
+      flash[:error] = "Couldn't set default resale"
+    end
   end
 end

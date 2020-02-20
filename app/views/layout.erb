@@ -22,6 +22,10 @@
             <li><a href="/logout">Logout</a></li>
             <li><a href="/resales/new">Create a new Resale</a></li>
             <li><a href="/resales">All Resales</a></li>
+            <li><a href="/workers">Workers </a></li>
+            <% if current_resale %>
+            <li class="current-resale-set">Current Resale set as: <%= current_resale.season %> <%= current_resale.year %></li>
+            <% end %>
           <% else %>
             <li><a href="/signup">Signup</a></li>
             <li><a href="/login">Login</a></li>

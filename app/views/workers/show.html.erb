@@ -1,3 +1,10 @@
 <h1>Volunteer Info: </h1>
-<p><%= @worker.first_name%> <%= @worker.last_name</p>
-<%= @worker.member_number %>
+<p><%= @worker.first_name%> <%= @worker.last_name %></p>
+<%- @worker.member_number %>
+<br />
+<br />
+<h3>Shifts you need to check in for:</h3>
+<% @shifts.each do |shift| %>
+     <p><a href="/"><%= shift.start_time.strftime("%B, %-d at %I:%M") %></a></p>
+     <p><%= shift.resale_id %></p>
+<% end %>

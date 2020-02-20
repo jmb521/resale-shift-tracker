@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190922025343) do
+ActiveRecord::Schema.define(version: 20190916034741) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "username"
@@ -34,19 +34,19 @@ ActiveRecord::Schema.define(version: 20190922025343) do
   create_table "shift_workers", force: :cascade do |t|
     t.integer  "shift_id"
     t.integer  "worker_id"
-    t.boolean  "checked_in", default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
     t.integer  "resale_id"
+    t.boolean  "checked_in",                    default: false
+    t.string   "member_number_they_worked_for"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   create_table "shifts", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.date     "resale_date"
     t.time     "start_time"
     t.time     "end_time"
     t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "workers", force: :cascade do |t|

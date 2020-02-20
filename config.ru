@@ -5,7 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 use Rack::MethodOverride
 run ApplicationController
-use ShiftWorkersController
+
 use ResalesController
 use WorkersController
 use AdminsController

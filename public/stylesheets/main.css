@@ -119,6 +119,21 @@
     list-style: decimal;
     margin-left: 25px;
   }
+
+  .delete-button {
+    background-color: red;
+    border-radius: 25%;
+    width: 40px;
+    height: 30px;
+  }
+  nav ul li {
+    list-style-type: none;
+    padding: 20px;
+    display: inline-block;
+  }
+  .current-resale-set {
+    color: red;
+  }
 }
 
 @media screen and (max-width: 600px) {
